@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+   <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Register user</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="css/main.css" rel="stylesheet">
+        <!--<link rel="stylesheet" type="text/css" href="css/leaflet.css" />-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css"/>
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+        <script src="js/jquery.js"></script>
+        <script src="js/core.js"> </script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    </head>
+    <body>
+        <center>
+            <h3>
+                Usuarios Registrados</h3>
+        </center>
+        <input type="text" id="myInput" onkeyup="searchUsers()" placeholder="Search for names..">
+        <table class="table table-hover" id="usersTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Name Relative</th>
+                <th>Info</th>
+                
+              </tr>
+            </thead>
+            <tbody id="users_table_body">
+                
+            </tbody>
+          </table>
+        <div class="container">
+            
+        </div>
+        <div class="modal fade" id="userInfoModal" role="dialog">
+            <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa fa-user-circle fa-1x"></i>User Info</h4>
+                    </div>
+                    <div class="modal-body" id="user_info_form_text">
+                        <input type="text" id="email_input" name="email_input" style="display: none;" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="name_watch_user">Watch User Name</label>
+                        <input type="text" id="name_watch_user" name="name_watch_user" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="name_relative">Relative Name</label>
+                        <input type="text" id="name_relative" name="name_relative" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="address">Address</label>
+                        <input type="text" id="address" name="address" class="form-control" value=""/>
+
+                        <label class="control-label col-xs-12" for="watch_phone_number">Watch Phone Number</label>
+                        <input type="text" id="watch_phone_number" name="watch_phone_number" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="enableUser">Enable User</label>
+                        
+                        <label class="switch col-xs-12">
+                                <input type="checkbox" id="userEnabled" name="userEnabled" class="form-control" value=""/>
+                                <span class="slider round"></span>
+                        </label>
+                        <label class="control-label col-xs-12" for="alarmEnabled">Enable Central Alarm</label>
+                        
+                        <label class="switch col-xs-12">
+                                <input type="checkbox" id="alarmEnabled" name="alarmEnabled" class="form-control" value=""/>
+                                <span class="slider round"></span>
+                        </label>
+                        
+
+                     </div>
+                     <label class="col-xs-12"></label>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="saveUserInfo()" data-dismiss="modal">Mostrar</button><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="actionButtonsModal" role="dialog">
+                <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa fa-user-circle fa-1x"></i>More</h4>
+                        </div>
+                        <div class="modal-body" id="user_info_form_text">
+                            
+                         </div>
+                         
+                        <div class="modal-footer">
+                                <div class="col-xs-12">
+                                    <input type="button" class="btn btn-primary col-xs-5"  value="Request Call">
+                                    <label class="col-xs-2"></label>
+                                    <input type="button" class="btn btn-primary col-xs-5"  value="Request Hearrate">
+                                </div>
+                                
+                                <div class="col-xs-12">
+                                    <input type="button" class="btn btn-primary col-xs-5"  value="Request Monitor Call">
+                                    <label class="col-xs-2"></label>
+                                    <input type="button" class="btn btn-primary col-xs-5"  value="Set upload Inteval">
+                                </div>
+                                
+                                <div class="col-xs-12">
+                                    <input type="button" class="btn btn-primary col-xs-5"  value="SOS Alarm">
+                                    <label class="col-xs-2"></label>
+                                    <input type="button" class="btn btn-primary col-xs-5" data-dismiss="modal" value="Cerrar"/>
+                                </div>
+                                
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var serverIp = "https://app.synkiria.com/secure.php";
+        $(function() {
+            $.post(serverIp, {c: 32},
+                function (data) {
+                    data = jQuery.parseJSON(data);
+                    for(var i=0;i<data.length;i++){
+                        $("#users_table_body").append(
+                            "<tr>"+
+                                "<td>"+data[i].name_watch_user+"</d>"+
+                                "<td>"+data[i].name_relative+"</d>"+
+                                "<td><input type='button' value='Edit' onclick=showUserInfo('"+data[i].email+"') class='btn btn-primary'/>"+
+                                    "<button type='button' class='btn btn-primary far fa-cog' onclick=showActionButtons('"+data[i].email+"') >More</button>"+
+                                    
+                                "</d>"+
+
+                                "</tr>"
+                        )
+                    }
+                }
+            );
+        });
+    </script>
+    </body>
+    
+</html>

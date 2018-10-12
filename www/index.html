@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+    <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Synkiria Watch</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="css/main.css" rel="stylesheet">
+        <!--<link rel="stylesheet" type="text/css" href="css/leaflet.css" />-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css"/>
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+        <script src="js/jquery.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script>
+$('#hStarttime').timepicker({
+    timeFormat: 'hh:mm:ss',
+    interval: 30,
+    minTime: '10',
+    maxTime: '09:00pm',
+    defaultTime: '11',
+    startTime: '10:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+</script>
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" style="float:left;" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Synkiria Watch</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" onclick="getGeneralInformation();toggle_menu();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();">
+                                <i class="fa fa-eye fa-1x" ></i> Información General
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="getHistoric();toggle_menu();">
+                                <i class="fa fa-history fa-1x"></i> Historico
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="lastAlerts();toggle_menu();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();">
+                                <i class="fa fa-comment-o fa-1x"></i> Alertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="forceLocation();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();">
+                                <i class="fa fa-street-view fa-1x"></i> Buscar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:xxxxxxxxx" id="watch_phone_number_link"><i class="fa fa-phone fa-1x"></i> Llamar</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#" onclick="callMonitor();toggle_menu();removeAllPathLines();hidePaginationButtons();">
+                                <i class="fa fa-phone fa-1x"></i> Escucha Silenciosa
+                            </a>
+                        </li> -->
+                        <li class="panel panel-default" style="border:none!important;">
+                            <div class="panel-heading"  style="background-color: #222222!important;border: none!important;">
+                              <a data-toggle="collapse"  style="text-decoration: none;background-color: #222222!important;color: #9d9d9d!important;border: none!important;" href="#collapse1" >
+                                  <i class="fa fa-cog" ></i> 
+                                   Configurar
+                              </a>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse" style="background-color: #222222!important;color: gray!important;border: none!important;">
+                              <ul class="list-group" style="background-color: #222222!important;color: gray!important;border: none!important;">
+                                  <li>
+                                       <a href="#" onclick="toggle_menu();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                            <i class="fa  fa fa-info-circle fa-1x"></i> Información
+                                        </a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="https://app.synkiria.com/configuration.html" onclick="removeAllPathLines();hidePaginationButtons();"  style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                             <i class="fa  fa fa-info-circle fa-1x"></i> Area segura
+                                         </a>
+                                     </li> -->
+                                    <li>
+                                        <a href="#" onclick="configureSOS();toggle_menu();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                            <i class="fa fa-phone fa-1x"></i> Teléfono SOS
+                                        </a>
+                                    </li>
+                                    
+                                  <li>
+                                    <a href="#" onclick="setAlarm();toggle_menu();removeAllPathLines();hidePaginationButtons();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                        <i class="fa fa-bell-o fa-1x" ></i> Establecer Alarmas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="powerOffWatch();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                        <i class="fa fa-power-off fa-1x"></i> Apagar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="enableDisableAutoAnswer();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                        <i class="fa fa-toggle-off fa-1x"></i> Resupuesta automática
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://app.synkiria.com/register.html" onclick="toggle_menu();removeAllPathLines();hidePaginationButtons();deleteMarkersHistoric();" style="background-color: #222222!important;color: #9d9d9d!important;border: none!important; margin-left: 20px">
+                                        <i class="fa 	fa fa-user-plus fa-1x"></i> Registrar
+                                    </a>
+                                </li>
+                                
+                              </ul>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <a href="#" onclick="logoutUser()">Logout</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="closeApp()">
+                                <i class="fa fa-sign-out fa-1x"></i> SALIR
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+            
+        </nav>
+
+        
+        <!-- Page Content -->
+        <span class="col-sm-12 label label-success" style="z-index:899;position:fixed;top:50px;left:20px;" id="sucess_message"></span>
+        
+        <div class="mapbox">
+            <!--<div class="row-fluid some" id="mapid"></div>-->
+            
+            <div class="row-fluid overlay">
+                <div class="gps-information" id="gps-information">
+
+                </div>
+                <label id ="wait_label" style="margin-top: 30px;color:#222222; float:left;"></label>
+            </div>
+            
+            <div class="row-fluid some" id="mapid"></div>
+            
+
+        </div>
+        <center>
+            <div class="footer" style="margin-top: -5%;position: static; display: none;" id="historicPagination">
+                <ul class="pagination pagination-md">
+                    <li><button type="button" class="round-left previous col-sm-1" id="previousButton" onclick="onPreviousClicked();">&#8249;</button></li>
+                    <li><button type="button" id="bbButton1" onclick="onPaginationButtonClicked(1)">1</button></li>
+                    <li><button type="button" id="bbButton2" onclick="onPaginationButtonClicked(2)">2</button></li>
+                    <li><button type="button" id="bbButton3" onclick="onPaginationButtonClicked(3)">3</button></li>
+                    <li><button type="button" id="bbButton4" onclick="onPaginationButtonClicked(4)">4</button></li>
+                    <li><button type="button" id="bbButton5" onclick="onPaginationButtonClicked(5)">5</button></li>
+                    <li><button type="button" class="round-right next col-sm-1"  id="nextButton" onclick="onNextClicked();">&#8250;</button></li>
+                  </ul>
+                  
+            </div>
+        </center>
+        
+        
+        <!-- /.container -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="telephoneConfigurarModal" role="dialog">
+            <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-phone fa-1x"></i>Teléfono SOS</h4>
+                    </div>
+                    <div class="modal-body" id="sos_form_text">
+                        <label class="control-label col-xs-12" for="sos1">Teléfono de SOS Principalo</label>
+                        <input type="text" id="sos1" name="sos1" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="sos2">Teléfono de SOS 2</label>
+                        <input type="text" id="sos2" name="sos2" class="form-control" value=""/>
+                        <label class="control-label col-xs-12" for="sos3">Teléfono de SOS 3</label>
+                        <input type="text" id="sos3" name="sos3" class="form-control" value=""/>
+
+                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="saveSOSConfig()" data-dismiss="modal">Mostrar</button><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="infoModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">INFORMACION GENERAL</h4>
+                    </div>
+                    <div class="modal-body" id="InfoModalText">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        
+         <div class="modal fade" id="alertModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ALERTAS</h4>
+                    </div>
+                    <div class="modal-body" id="alertModalText">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="modal fade" id="autoAnswerModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Resupuesta automática</h4>
+                    </div>
+                    <div class="modal-body" id="autoAnswerModalText">
+                        <label class="switch">
+                            <input type="checkbox" id="autoAnswerEnabled">
+                            <span class="slider round"></span>
+                          </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary " style="float:left" data-dismiss="modal" onclick="enableDisableAutoAnswerProcess()">Salvar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        
+        <div class="modal fade" id="historyModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">HISTORICO</h4>
+                    </div>
+                    <div class="modal-body" id="historyModalText">
+                        Desde: <br/>
+                        <input type="date" name="start" step="1" min="2017-01-01" max="2020-12-31" id="hStart"><input type="text" value="00:00:00" name="starttime"  id="hStarttime">
+                        <br/>
+                        Hasta: <br/>
+                        <input type="date" name="end" step="1" min="2017-01-01" max="2020-12-31" id="hEnd"><input type="text" name="endtime" value="23:59:59"  id="hEndtime">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="traceH()" data-dismiss="modal">Mostrar</button><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="locationModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">LOCALIZACION</h4>
+                    </div>
+                    <div class="modal-body" id="locationModalText">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="monitorModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ESCUCHA SILENCIOSA</h4>
+                    </div>
+                    <div class="modal-body" id="monitorModalText">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="registerModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login</h4>
+                    </div>
+                    <div class="modal-body" id="registerModalText">
+                        <label for="token">Email:</label>
+                        <input type="text" class="form-control" id="email">
+                        <label for="token">Password:</label>
+                        <input type="password" class="form-control" id="password">
+                        <label class="checkbox-inline">
+                              <input type="checkbox" id="remember" value=""><p style="font-size: 14px;">Recuérdame</p>
+                        </label>
+                    </div>
+                    
+                            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary " style="float:left" data-dismiss="modal" onclick="loginProcess()">Iniciar sesión</button>
+                        <a href="register.html" style="float:left" class="btn btn-default col-xs-6">Registro</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="alarmModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ALARMAS</h4>
+                    </div>
+                    <div class="modal-body" id="alarmModalText">
+                        <center><input type="checkbox" checked data-toggle="toggle" id="chk1"></center>
+                        <div class="input-group clockpicker" data-placement="center" data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" id="alarm1" value="">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+
+                        </div>
+                        <center><input type="checkbox" checked data-toggle="toggle" id="chk2"></center>
+                        <div class="input-group clockpicker" data-placement="center" data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" id="alarm2" value="">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+
+                        <center><input type="checkbox" checked data-toggle="toggle" id="chk3"></center>
+                        <div class="input-group clockpicker" data-placement="center" data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" id="alarm3" value="">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <center><input type="checkbox" checked data-toggle="toggle" id="takeOff"><br/>QUITAR RELOJ</center>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal" onclick="configureAlarm()">Enviar</a><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="historicModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">LOCALIZACION</h4>
+                    </div>
+                    <div class="modal-body" id="historicModalText">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="modal fade" id="registerIdModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">IDENTIFICADOR</h4>
+                    </div>
+                    <div class="modal-body" id="registerIdModalText">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default fa fa-info-circle" data-dismiss="modal" data-target="#registerModal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+      
+        
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery-clockpicker.min.js" type="text/javascript"></script>
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-clockpicker.min.js" type="text/javascript"></script>
+        <script src="js/clockpicker.js" type="text/javascript"></script>
+        <!--<script src="js/leaflet.js"></script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX4tJEi3RvNFOiiCAYtSz2kH3ujLX6wZc&callback=initMap"async defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js"></script>
+        <script  src ="js/core.js"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <script src="cordova.js"></script>
+        <script src="js/md5.js" type="text/javascript"></script>
+
+    </body>
+
+</html>
